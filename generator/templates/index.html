@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Password generator, scrimba challenges, javascript projects">
+  <title> Password generator </title>
+  <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+  <style>
+    @font-face {
+  font-family: secular;
+  src: url('SecularOne-Regular.ttf');
+}
+*{
+  font-family: secular;
+  margin: 0;
+  padding: 0;
+  color: white;
+  /* box-sizing: border-box; */
+  }
+  #layout{
+    display: grid;
+    place-content: center;
+    background-color: #1C1C1C;
+    height: 100vh;
+    width: 100vw;
+  }
+  #in-layout{
+    display: grid;
+    place-content: center;
+    height: 80vh;
+    width: 70vw;
+    background-color: #1F2937;
+  }
+  .container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* margin: 40px; */
+    place-content: center; 
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: 
+    "head head"
+    "button null"
+    "but but";
+    height: 50vh;
+  }
+  .text{
+    display: grid;
+    grid-area: head;
+    font-size: 1.4em;
+    place-self: center;
+  }
+  .co{
+    color: #4ADF86;
+  }
+  .c{
+    font-size: 1em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #D1D5DB;
+  }
+  div.c1{
+    display: grid;
+    grid-area: but;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: "but1 but2";
+    border-top: 2px solid #2F3E53;
+    align-items: center;
+    grid-column-gap: 10px;
+  }
+  button.but{
+    display: grid;
+    grid-area: button;
+    background-color: #10B981;
+    padding: 6px 10px;
+    height: 42px;
+    color: white;
+    border-radius: 6px;
+    border: transparent;
+    font-size: 1.07em;
+    align-self: center;
+  }
+  .pass1{
+    display: grid;
+    grid-area: but1;
+    background-color: #273549;
+    padding: 6px 10px;
+    color: #55F991;
+    height: 39px;
+    border-radius: 6px;
+    border: transparent;
+    font-size: 1.07em;
+  }
+  .pass2{
+    display: grid;
+    grid-area: but2;
+    background-color: #273549;
+    padding: 6px 10px;
+    color: #55F991;
+    border-radius: 6px;
+    border: transparent;
+    font-size: 1.07em;
+    height: 39px;
+  }
+  .alert{
+    font-style: italic;
+    color: #D1D5DB;
+    font-weight: 100;
+  }
+  </style>
+
+</head>
+<body>
+  <div id="layout">
+    <div id="in-layout">
+      <div class="container">
+        <div class="text">Generate a <br>
+        <span class="co"> random password</span>  
+        <span class="c">  Never use an insecure password again.</span>
+      </div>
+      <!-- <form action="POST"></form> -->
+      <input type="button" class="but" id="generate" name="generate" value="Generate password" />
+      <div class="c1">
+        <div class="pass1" id="pass1" ></div>
+      </div>
+      </div>
+      <div class="alert">Password generator</div>
+    </div>
+  </div>
+</body>
+    <script>
+        $('#generate').click(function(){
+            $.ajax({
+                type: "GET",
+                url: "/generate",
+                data: {
+                    click: true,
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success: function(data){
+                    $('#pass1').html(data)
+                }
+            })
+        })
+    </script>
+</html>
