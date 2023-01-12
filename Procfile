@@ -1,1 +1,1 @@
-web: gunicorn 'pass_gen.wsgi'
+web: gunicorn 'password_generator.wsgi'
