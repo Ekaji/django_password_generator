@@ -19,7 +19,7 @@ def generate(request):
         if len(password) < 15:
             for i in range(15):
                 password += random.choice(characters)
-                print(password)
+    print(password)
     return HttpResponse(password)            
 
 
